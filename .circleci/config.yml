@@ -18,7 +18,6 @@ jobs:
       - run: php -r "unlink('composer-setup.php');"
 
       # Update Composer and install dependencies
-      - run: composer self-update
       - run: composer install --prefer-dist
 
       # Setup database
