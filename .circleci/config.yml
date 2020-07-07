@@ -5,8 +5,8 @@ jobs:
       #- image: circleci/node:jessie-browsers
       - image: circleci/php:7.2-node-browsers
       - image: mysql:5
-      environment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
       - image: selenium/standalone-chrome:3
     working_directory: ~/test_automatise
     steps:
