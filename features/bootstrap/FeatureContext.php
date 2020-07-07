@@ -2,6 +2,8 @@
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\User;
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
@@ -20,6 +22,42 @@ class FeatureContext extends RawMinkContext implements Context
     use KernelDictionary;
 
     private $currentUser;
+
+    /**
+     * @AfterStep
+     */
+    public function printLastResponseOnError(AfterStepScope $event)
+    {
+        if (!$event->getTestResult()->isPassed()) {
+            $this->saveDebugScreenshot();
+        }
+    }
+
+    /**
+     * @Then /^save screenshot$/
+     */
+    public function saveDebugScreenshot()
+    {
+        $driver = $this->getSession()->getDriver();
+
+        if (!$driver instanceof Selenium2Driver) {
+            return;
+        }
+
+        if (!getenv('BEHAT_SCREENSHOTS')) {
+            return;
+        }
+
+        $filename = microtime(true).'.png';
+        $path = $this->getContainer()
+                ->getParameter('kernel.root_dir').'/../behat_screenshots';
+
+        if (!file_exists($path)) {
+            mkdir($path);
+        }
+
+        $this->saveScreenshot($filename, $path);
+    }
 
     /**
      * Initializes context.
