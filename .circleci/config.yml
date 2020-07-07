@@ -40,7 +40,7 @@ jobs:
 
       - run:
           name: Run web server
-          command: php app/console server:run --env=test -vvv localhost:8080 > server.log 2>&1
+          command: php app/console server:run --env=test -vvv localhost:8000 > server.log 2>&1
           background: true
 
       # Run tests
