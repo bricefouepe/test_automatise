@@ -4,7 +4,6 @@ jobs:
     docker:
       #- image: circleci/node:jessie-browsers
       - image: circleci/php:7.2-node-browsers
-      - image: mysql:5
         environment:
           DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
           DATABASE_URL: sqlite3::memory:?pool=1
