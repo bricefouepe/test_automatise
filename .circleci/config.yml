@@ -3,9 +3,8 @@ jobs:
   build:
     docker:
       #- image: circleci/node:jessie-browsers
-      - image: circleci/php:7.2
+      - image: circleci/php:7.2-node-browsers
       - image: selenium/standalone-chrome:3
-      - image: circleci/node-jessie-browsers
     working_directory: ~/test_automatise
     steps:
       - checkout
