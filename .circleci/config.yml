@@ -5,9 +5,12 @@ jobs:
       #- image: circleci/node:jessie-browsers
       - image: circleci/php:7.2-node-browsers
         environment:
-          DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
-          DATABASE_URL: sqlite3::memory:?pool=1
-          DB: sqlite
+          DATABASE_URL: 'mysql2://root@127.0.0.1/circle_test?pool=5'
+          DB: mysql
+          RAILS_ENV: test
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_HOST: '%'
+      - image: 'circleci/mysql:5.7-ram'
       - image: selenium/standalone-chrome:3
     working_directory: ~/test_automatise
     steps:
