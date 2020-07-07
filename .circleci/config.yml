@@ -15,4 +15,4 @@ jobs:
           background: true
 
       # Run tests
-      - run: php vendor/bin/behat
+      - run: ./vendor/bin/behat
