@@ -7,7 +7,7 @@ jobs:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
       - image: selenium/standalone-chrome:3
-    working_directory: ~/your-repository-name
+    working_directory: ~/test_automatise
     steps:
       - checkout
 
