@@ -38,7 +38,7 @@ jobs:
 
       # Setup database
       - run: php app/console doctrine:database:create --env=test
-      - run: php app/console doctrine:schema:create --env=test
+      - run: app/console doctrine:schema:update --force --env=test
       - run: php app/console doctrine:fixtures:load --no-interaction
 
 
