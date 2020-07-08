@@ -1,13 +1,9 @@
-# BDD, Behat, Mink and other Wonderful ThingsRESTing with Symfony
+# BDD, Behat, Mink and phpUnit with Symfony
 
-Well hi there! This repository holds the code and script
-for the [Behat PHP course on KnpUniversity](https://knpuniversity.com/screencast/behat).
 
 ## Setup the Project
 
 **NOTE**: This tutorial does not work in PHP 7.3 and above.
-
-Ok, cool - this will be easy!
 
 1. Make sure you have [Composer installed](https://getcomposer.org/).
 
