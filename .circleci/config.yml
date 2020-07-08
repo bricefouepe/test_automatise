@@ -2,27 +2,53 @@ version: 2
 jobs:
   build:
     docker:
-      - image: php:7
-      - image: mysql:5
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      - image: selenium/standalone-chrome:3
-    working_directory: ~/your-repository-name
+      #- image: circleci/node:jessie-browsers
+      - image: circleci/php:7.1-browsers
+    working_directory: ~/test_automatise
     steps:
       - checkout
 
-      # Update Composer and install dependencies
+      - run: mkdir test-reports
       - run:
+          name: "Download Selenium"
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: "Start Selenium"
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+
+      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
+      - run: sudo apt install zlib1g-dev libsqlite3-dev
+      - run: sudo docker-php-ext-install zip
+
+      - restore_cache:
+          keys:
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: "Install Dependencies"
           command: composer install -n --prefer-dist
 
-      # Setup database
-      - run: php bin/console doctrine:database:create --env=test
-      - run: php bin/console doctrine:schema:create --env=test
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
 
+      # Setup database
+      - run: php app/console doctrine:database:create --env=test
+      - run: php app/console doctrine:schema:create --env=test
+      - run: php app/console doctrine:fixtures:load --no-interaction
+
+
+      #run web server
       - run:
-          name: Run web server
-          command: php bin/console server:run --env=test -vvv localhost:8080 > server.log 2>&1
+          name: "Run web server"
+          command: php app/console server:run
           background: true
 
       # Run tests
-      - run: ./vendor/bin/behat
+      - run:
+          name: "Run Tests"
+          command: ./vendor/bin/behat
