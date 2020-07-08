@@ -13,7 +13,7 @@ jobs:
 
       # Update Composer and install dependencies
       - run:
-        command: composer install -n --prefer-dist
+          command: composer install -n --prefer-dist
 
       # Setup database
       - run: php bin/console doctrine:database:create --env=test
