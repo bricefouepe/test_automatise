@@ -50,5 +50,5 @@ jobs:
 
       # Run tests
       - run:
-          name: "Run Tests"
+          name: "Run All Tests"
           command: ./vendor/bin/behat
