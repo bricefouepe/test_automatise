@@ -6,7 +6,7 @@ Feature: Search
   Background:
     Given I am on "/"
 
-  @fixtures @javascript
+  @fixtures
   Scenario Outline:
     When I fill in the search box with "<term>"
     And I press the search button

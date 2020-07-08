@@ -77,11 +77,11 @@ class CommandLineProcessContext extends RawMinkContext implements Context
         );
     }
 
-    /**
-     * @Given There is a dir named :dir
-     */
-    public function thereIsADirNamed($dir)
-    {
-        mkdir($dir);
-    }
+//    /**
+//     * @Given There is a dir named :dir
+//     */
+//    public function thereIsADirNamed($dir)
+//    {
+//        mkdir($dir);
+//    }
 }

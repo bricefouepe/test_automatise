@@ -13,7 +13,6 @@ Feature: Product Admin Area
     And I am on "/admin"
     When I click "Products"
     Then I should see 6 products
-
   @javascript
   Scenario: Products show author
     Given I author 5 products
