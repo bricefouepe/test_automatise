@@ -3,6 +3,7 @@ Feature: Authentication
   As a admin user
   I need to be able to login and logout
 
+  @javascript
   Scenario: Logging
     Given There is an admin user "admin" with password "admin"
     And I am on "/"

@@ -6,6 +6,7 @@ Feature: Product Admin Area
   Background:
     Given I am logged in as an admin
 
+  @javascript
   Scenario: List available products
     Given there are 5 products
     And there is 1 product
@@ -13,11 +14,13 @@ Feature: Product Admin Area
     When I click "Products"
     Then I should see 6 products
 
+  @javascript
   Scenario: Products show author
     Given I author 5 products
     When I go to "/admin/product"
     Then I should not see "Anonymous"
 
+  @javascript
   Scenario: Show published/unpublished
     Given the following products exists:
       | name | is published |
@@ -39,6 +42,7 @@ Feature: Product Admin Area
     And I should see "Veloci-chew toy"
     Then I should not see "Anonymous"
 
+  @javascript
   Scenario: Deleting a product
     Given the following products exists:
       | name |
