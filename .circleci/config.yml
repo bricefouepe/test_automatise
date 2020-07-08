@@ -12,7 +12,6 @@ jobs:
       - checkout
 
       # Update Composer and install dependencies
-      - run: composer self-update
       - run: composer install --prefer-dist
 
       # Setup database
